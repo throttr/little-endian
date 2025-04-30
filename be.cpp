@@ -59,14 +59,19 @@ int main() {
     raw[27] = 20;
 
     const auto t1 = std::chrono::high_resolution_clock::now();
-    volatile uint64_t sum_be = 0;
-    for (size_t i = 0; i < N; ++i) {
-        const auto h = parse_be(raw);
-        sum_be += h.quota_ + h.usage_ + h.ttl_;
+    volatile uint64_t accumulator = 0;
+
+    for (size_t e = 0; e < 100; ++e) {
+        accumulator = 0;
+
+        for (size_t i = 0; i < N; ++i) {
+            const auto h = parse_be(raw);
+            accumulator += h.quota_ + h.usage_ + h.ttl_;
+        }
     }
     const auto t2 = std::chrono::high_resolution_clock::now();
 
     const auto elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count();
-    std::cout << "Sum Big-endian : " << sum_be << ", Time: " << elapsed << " ns\n";
+    std::cout << "Time: " << elapsed << " ns\n";
     return 0;
 }

@@ -40,14 +40,18 @@ int main() {
     const auto t1 = std::chrono::high_resolution_clock::now();
     volatile uint64_t accumulator = 0;
 
-    for (size_t i = 0; i < N; ++i) {
-        const auto* h = reinterpret_cast<const request_insert_header*>(&raw);
-        accumulator += h->quota_ + h->usage_ + h->ttl_;
+    for (size_t e = 0; e < 100; ++e) {
+        accumulator = 0;
+
+        for (size_t i = 0; i < N; ++i) {
+            const auto* h = reinterpret_cast<const request_insert_header*>(&raw);
+            accumulator += h->quota_ + h->usage_ + h->ttl_;
+        }
     }
 
     const auto t2 = std::chrono::high_resolution_clock::now();
     const auto elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count();
 
-    std::cout << "Sum reinterpret (static): " << accumulator << ", Time: " << elapsed << " ns\n";
+    std::cout << "Time: " << elapsed << " ns\n";
     return 0;
 }
