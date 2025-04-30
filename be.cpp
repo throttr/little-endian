@@ -61,7 +61,7 @@ int main() {
     const auto t1 = std::chrono::high_resolution_clock::now();
     volatile uint64_t accumulator = 0;
 
-    for (size_t e = 0; e < 1'000; ++e) {
+    for (size_t e = 0; e < 100; ++e) {
         accumulator = 0;
 
         for (size_t i = 0; i < N; ++i) {
