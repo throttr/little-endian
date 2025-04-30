@@ -61,7 +61,7 @@ int main() {
     const auto t1 = std::chrono::high_resolution_clock::now();
     volatile uint64_t accumulator = 0;
 
-    for (size_t e = 0; e < 100; ++e) {
+    for (size_t e = 0; e < 1'000; ++e) {
         accumulator = 0;
 
         for (size_t i = 0; i < N; ++i) {
@@ -71,7 +71,7 @@ int main() {
     }
     const auto t2 = std::chrono::high_resolution_clock::now();
 
-    const auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1).count();
-    std::cout << "Time: " << elapsed << " ms\n";
+    const auto elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count();
+    std::cout << "Time: " << elapsed << " ns\n";
     return 0;
 }
