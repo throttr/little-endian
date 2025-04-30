@@ -52,6 +52,6 @@ int main() {
     const auto t2 = std::chrono::high_resolution_clock::now();
     const auto elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count();
 
-    std::cout << "Time: " << elapsed << " ns\n";
+    std::cout << "Time: " << elapsed / 1000 << " ms\n";
     return 0;
 }
